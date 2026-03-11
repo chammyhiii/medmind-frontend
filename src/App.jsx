@@ -5,6 +5,10 @@ import ReactMarkdown from 'react-markdown';
  * MEDMIND PRO - THIẾT KẾ LUXURY DASHBOARD
  * Tiêu chuẩn: Tối giản, Chuyên nghiệp, Hiệu suất cao
  */
+// Nếu đang chạy ở máy thì dùng localhost, nếu đã deploy thì dùng link Render
+const API_BASE_URL = window.location.hostname === "localhost" 
+  ? "http://localhost:4000" 
+  : "https://medmind-backend-c1xo.onrender.com"; // Thay link thật của bạn vào đây
 const App = () => {
   // --- STATE MANAGEMENT ---
   const [messages, setMessages] = useState([]);
@@ -40,7 +44,7 @@ const App = () => {
     setInput("");
 
     try {
-      const response = await fetch("http://localhost:4000/api/v1/medical/analyze", {
+      const response = await fetch(`${API_BASE_URL}/api/v1/medical/analyze`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
